@@ -1,0 +1,50 @@
+[
+    {
+        "model": "starterupperupp.company",
+        "pk": 1,
+        "fields": {
+            "company_name": "Kane Studios",
+            "company_slogan": "Its my way or the highway, stooge!",
+            "created_date": "2021-03-14 07:54[:32[.123456]][UTD]",
+            "last_updated_date": "2021-03-14 07:54[:32[.123456]][UTD]"
+        }
+    },
+    {
+        "model": "starterupperupp.transaction",
+        "pk": 1,
+        "fields": {
+            "created_date":"2021-03-14 07:54[:32[.123456]][UTD]",
+            "last_updated_date":"2021-03-14 07:54[:32[.123456]][UTD]",
+            "associated_company": "1",
+            "approved": "1",
+            "investment_amount": "957632",
+            "hours_worked": "",
+            "associated_user": "2"
+
+        }
+    },
+    {
+        "model": "starterupperupp.company",
+        "pk": 2,
+        "fields": {
+            "company_name": "Higgins Incorporated",
+            "company_slogan": "Neutrallity is our reality",
+            "created_date": "2021-03-14 07:54[:32[.123456]][UTD]",
+            "last_updated_date": "2021-03-14 07:54[:32[.123456]][UTD]"
+        }
+    },
+    {
+        "model": "starterupperupp.transaction",
+        "pk": 2,
+        "fields": {
+            "created_date":"2021-03-14 07:54[:32[.123456]][UTD]",
+            "last_updated_date":"2021-03-14 07:54[:32[.123456]][UTD]",
+            "associated_company": "1",
+            "approved": "0",
+            "investment_amount": "467376",
+            "hours_worked": "2.5",
+            "associated_user": "2"
+
+        }
+    }
+]
