@@ -173,7 +173,10 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'burst': '1/second',
         'sustained': '1000/day', 
-    }
+    },
+    'DEFAULT_PERMISSION_CLASSES': (
+        'starterupp.safelistpermission.SafelistPermission',   # see REST_SAFE_LIST_IPS
+    )
 }
 # Logging is handled by the default Django Logger augmented with 
 # the package 'django-requestlogs with a little configuration, as seen below
@@ -206,5 +209,9 @@ REQUESTLOGS = {
     'METHODS': ('GET', 'PUT', 'PATCH', 'POST', 'DELETE'),
 }
 
-
+REST_SAFE_LIST_IPS = [
+    '127.0.0.1',
+    '123.45.67.89',   # example IP
+    '192.168.0.',     # the local subnet, stop typing when subnet is filled out
+]
 
