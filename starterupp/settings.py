@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -41,13 +41,15 @@ INSTALLED_APPS = [
     'starterupperupp',
     'rest_framework',
 #    'actionslog',
-#    'ip_logger',
+    'ip_logger',
 #    'django_audit_log_middleware',
 ]
 
 MIDDLEWARE = [
-#    'ip_logger.middleware.LogIPMiddleware',
+    'ip_logger.middleware.LogIPMiddleware',
+    'requestlogs.middleware.RequestLogsMiddleware',
 #    'django_audit_log_middleware.AuditLogMiddleware',
+    'request_logging.middleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,8 +132,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
+    'EXCEPTION_HANDLER': 'requestlogs.views.exception_handler',
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
     'DEFAULT_PARSER_CLASSES': (
@@ -159,6 +163,48 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
     ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json',
+    # Throttling is the built in method of Rate Limiting in Django Rest Framework
+    'DEFAULT_THROTTLE_CLASSES': [
+        'starterupp.throttles.BurstRateThrottle',
+        'starterupp.throttles.SustainedRateThrottle'
+    ], # Below is where we specify that requests are globally limited to 1 per second
+       # Per each IP Address and a total of 1000 request per day
+    'DEFAULT_THROTTLE_RATES': {
+        'burst': '1/second',
+        'sustained': '1000/day', 
+    }
 }
+# Logging is handled by the default Django Logger augmented with 
+# the package 'django-requestlogs with a little configuration, as seen below
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'requestlogs_to_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': './tmp/requestlogs.log',
+        },
+    },
+    'loggers': {
+        'requestlogs': {
+            'handlers': ['requestlogs_to_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+REQUESTLOGS = {
+    'STORAGE_CLASS': 'requestlogs.storages.LoggingStorage',
+    'ENTRY_CLASS': 'requestlogs.entries.RequestLogEntry',
+    'SERIALIZER_CLASS': 'requestlogs.storages.BaseEntrySerializer',
+    'SECRETS': ['password', 'token'],
+    'ATTRIBUTE_NAME': '_requestlog',
+    'METHODS': ('GET', 'PUT', 'PATCH', 'POST', 'DELETE'),
+}
+
+
 
