@@ -1,5 +1,7 @@
 from rest_framework import permissions
-from starterupp import settings 
+
+from starterupp import settings
+
 
 class SafelistPermission(permissions.BasePermission):
     """

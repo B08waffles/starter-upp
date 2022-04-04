@@ -31,30 +31,33 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 
+    'django.contrib.admin',
     'django.contrib.auth',  # Core authentication framework and its default models
-    'django.contrib.contenttypes',  # Django content type system (allows permissions to be associated with models)
+    # Django content type system (allows permissions to be associated with models)
+    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'starterupperupp.apps.StarterupperuppConfig'
+    #    'starterupperupp.apps.StarterupperuppConfig'
     'starterupperupp',
     'rest_framework',
-#    'actionslog',
+    #    'actionslog',
     'ip_logger',
-#    'django_audit_log_middleware',
+    #    'django_audit_log_middleware',
 ]
 
 MIDDLEWARE = [
     'ip_logger.middleware.LogIPMiddleware',
     'requestlogs.middleware.RequestLogsMiddleware',
-#    'django_audit_log_middleware.AuditLogMiddleware',
+    #    'django_audit_log_middleware.AuditLogMiddleware',
     'request_logging.middleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',  # Manage sessions across requests
+    # Manage sessions across requests
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Associates users with requests using sessions
+    # Associates users with requests using sessions
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -133,7 +136,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'requestlogs.views.exception_handler',
     'DEFAULT_PAGINATION_CLASS':
@@ -168,17 +170,17 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': [
         'starterupp.throttles.BurstRateThrottle',
         'starterupp.throttles.SustainedRateThrottle'
-    ], # Below is where we specify that requests are globally limited to 1 per second
-       # Per each IP Address and a total of 1000 request per day
+    ],  # Below is where we specify that requests are globally limited to 1 per second
+    # Per each IP Address and a total of 1000 request per day
     'DEFAULT_THROTTLE_RATES': {
         'burst': '1/second',
-        'sustained': '1000/day', 
+        'sustained': '1000/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
         'starterupp.safelistpermission.SafelistPermission',   # see REST_SAFE_LIST_IPS
     )
 }
-# Logging is handled by the default Django Logger augmented with 
+# Logging is handled by the default Django Logger augmented with
 # the package 'django-requestlogs with a little configuration, as seen below
 
 LOGGING = {
@@ -214,4 +216,3 @@ REST_SAFE_LIST_IPS = [
     '123.45.67.89',   # example IP
     '192.168.0.',     # the local subnet, stop typing when subnet is filled out
 ]
-
