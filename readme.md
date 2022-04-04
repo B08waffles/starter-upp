@@ -1,6 +1,6 @@
-=====================================================================================
+-------------------------------------------------------------------------------------
         ~Instructions to setup and configure 'starterupp' web service~
-=====================================================================================
+-------------------------------------------------------------------------------------
 _____________________________________________________________________________________
 
                       *INSTRUCTIONS FOR LINUX BASED SYSTEMS*
@@ -118,11 +118,11 @@ specifications, examples are given as well for clarity.
 8. Step 8 is for when you are up to Proj 2 18. Please go to the settings.py file
 around line 176, change the value of the 'burst' rate to 100/second and save.
 Now make sure the server is running, open a new terminal in your IDE, you may
-need to repeat step 4 with a quick `source env/bin/activate` possibly, otherwise
+need to repeat step 4 with a quick `env\bin\activate` possibly, otherwise
 now type `python manage.py test`, this will run 9 Unit tests to satisfy Proj2.18.
 For clarity, this step requires you to have two open terminals to excecute.
 
-
+-------------------------------------------------------------------------------------
 
                             THANKS FOR READING!
 
@@ -135,3 +135,4 @@ For clarity, this step requires you to have two open terminals to excecute.
                         *        TAFE QLD          *
                         ============================
 
+-------------------------------------------------------------------------------------
