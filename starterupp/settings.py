@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--r!x%93q=md2^soi-&of#6%-l008wl)mj!s%t)3v4)gyy036a0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,12 +41,16 @@ INSTALLED_APPS = [
     #    'starterupperupp.apps.StarterupperuppConfig'
     'starterupperupp',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_json_api',
     #    'actionslog',
     'ip_logger',
+    'corsheaders',
     #    'django_audit_log_middleware',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'ip_logger.middleware.LogIPMiddleware',
     'requestlogs.middleware.RequestLogsMiddleware',
     #    'django_audit_log_middleware.AuditLogMiddleware',
@@ -60,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'starterupp.urls'
@@ -137,7 +142,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'requestlogs.views.exception_handler',
+    'DEFAULT_AUTHENTICICATION_CLASSES':[
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
+    'requestlogs.views.exception_handler'
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
     'DEFAULT_PARSER_CLASSES': (
@@ -156,7 +165,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
     'DEFAULT_FILTER_BACKENDS': (
-        'rest_framework_json_api.filters.QueryParameterValidationFilter',
+       # 'rest_framework_json_api.filters.QueryParameterValidationFilter',
         'rest_framework_json_api.filters.OrderingFilter',
         'rest_framework_json_api.django_filters.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
@@ -211,8 +220,18 @@ REQUESTLOGS = {
     'METHODS': ('GET', 'PUT', 'PATCH', 'POST', 'DELETE'),
 }
 
+CORS_ORIGIN_WHITELIST = [
+'http://localhost:1234',
+'http://127.0.0.1:1234',
+'http://localhost:8000',
+'http://127.0.0.1:8000'
+]
+
 REST_SAFE_LIST_IPS = [
     '127.0.0.1',
     '123.45.67.89',   # example IP
-    '192.168.0.',     # the local subnet, stop typing when subnet is filled out
+    '192.168.0.',
+    '127.0.0.1:1234'     # the local subnet, stop typing when subnet is filled out
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
