@@ -13,15 +13,6 @@ class CompanySerializer(serializers.ModelSerializer):
         )
 
 
-class TransactionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Transaction
-        fields = (
-            'id', 'created_date', 'last_updated_date', 'associated_company_id', 'approved',
-            'amount', 'type_of_contribution', 'associated_user_id'
-        )
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -29,3 +20,19 @@ class UserSerializer(serializers.ModelSerializer):
             'id', 'password', 'last_login', 'is_superuser', 'username', 'last_name',
             'email', 'is_staff', 'is_active', 'date_joined', 'first_name'
         )
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    # associated_user = serializers.SlugRelatedField(
+    #     many=False,
+    #     read_only=True,
+    #     slug_field="username"
+    # )
+
+    class Meta:
+        model = Transaction
+        fields = (
+            'id', 'created_date', 'last_updated_date', 'associated_company', 'approved',
+            'amount', 'type_of_contribution', 'associated_user'
+        )
+        
