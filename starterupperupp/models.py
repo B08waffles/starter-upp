@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Company(models.Model):
-    company_name = models.CharField(max_length=255)
+    company_name = models.CharField(max_length=255, unique=True)
     company_slogan = models.TextField(max_length=255)
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)
@@ -23,11 +23,11 @@ class Transaction(models.Model):
     )
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)
-    associated_company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    associated_company = models.ForeignKey(Company, to_field='company_name', on_delete=models.CASCADE, related_name='associated_company')
     approved = models.BooleanField(default=False)
-    amount = models.FloatField()
+    amount = models.FloatField(max_length=255)
     type_of_contribution = models.CharField(max_length=25, choices=CHOICES)
-    associated_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    associated_user = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE, related_name='associated_user')
 
     def __int__(self):
         return self.pk

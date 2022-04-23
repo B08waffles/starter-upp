@@ -11,22 +11,28 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 # Views handle the HTTP requests for our models
 
+
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
         try:
-            data = JSONParser().parse(request) # data is a dictionary
+            data = JSONParser().parse(request)  # data is a dictionary
             user = User.objects.create_user(
-                            username=data['username'],
-                password=data['password'])
+                username=data['username'],
+                password=data['password'],
+                email=data['email'],
+                first_name=data['first_name'],
+                last_name=data['last_name'])
+
             user.save()
 
             token = Token.objects.create(user=user)
-            return JsonResponse({'token':str(token)},status=201)
+            return JsonResponse({'token': str(token)}, status=201)
         except IntegrityError:
             return JsonResponse(
-                {'error':'username taken. choose another username'},
+                {'error': 'username and/or email taken. choose another username and/or email'},
                 status=400)
+
 
 @csrf_exempt
 def login(request):
@@ -38,14 +44,15 @@ def login(request):
             password=data['password'])
         if user is None:
             return JsonResponse(
-                    {'error':'unable to login. check username and password'},
+                {'error': 'unable to login. check username and password'},
                 status=400)
-        else: # return user token
+        else:  # return user token
             try:
                 token = Token.objects.get(user=user)
-            except: # if token not in db, create a new one
+            except:  # if token not in db, create a new one
                 token = Token.objects.create(user=user)
-            return JsonResponse({'token':str(token)}, status=201)
+            return JsonResponse({'token': str(token)}, status=201)
+
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
@@ -55,6 +62,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -17,8 +17,8 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = (
-            'id', 'created_date', 'last_updated_date', 'associated_company', 'approved',
-            'amount', 'type_of_contribution', 'associated_user'
+            'id', 'created_date', 'last_updated_date', 'associated_company_id', 'approved',
+            'amount', 'type_of_contribution', 'associated_user_id'
         )
 
 

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--r!x%93q=md2^soi-&of#6%-l008wl)mj!s%t)3v4)gyy036a0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -43,17 +43,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_json_api',
-    #    'actionslog',
+    #'actionslog',
     'ip_logger',
     'corsheaders',
-    #    'django_audit_log_middleware',
+    'django_audit_log_middleware',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'ip_logger.middleware.LogIPMiddleware',
     'requestlogs.middleware.RequestLogsMiddleware',
-    #    'django_audit_log_middleware.AuditLogMiddleware',
+    
     'request_logging.middleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     # Manage sessions across requests
@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_audit_log_middleware.AuditLogMiddleware',
     
 ]
 
@@ -95,6 +96,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        
     }
 }
 
@@ -182,7 +184,7 @@ REST_FRAMEWORK = {
     ],  # Below is where we specify that requests are globally limited to 1 per second
     # Per each IP Address and a total of 1000 request per day
     'DEFAULT_THROTTLE_RATES': {
-        'burst': '1/second',
+        'burst': '10/second',
         'sustained': '1000/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
@@ -234,4 +236,13 @@ REST_SAFE_LIST_IPS = [
     '127.0.0.1:1234'     # the local subnet, stop typing when subnet is filled out
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
