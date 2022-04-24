@@ -23,16 +23,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    # associated_user = serializers.SlugRelatedField(
-    #     many=False,
-    #     read_only=True,
-    #     slug_field="username"
-    # )
-
+    # associated_company = serializers.CharField()
+    # associated_user = serializers.CharField()
     class Meta:
         model = Transaction
         fields = (
             'id', 'created_date', 'last_updated_date', 'associated_company', 'approved',
-            'amount', 'type_of_contribution', 'associated_user'
+            'amount', 'type_of_contribution', 'associated_user', 'associated_user_id',
+            'associated_company_id'
         )
-        
+        #lookup_field = 'associated_company_id'
