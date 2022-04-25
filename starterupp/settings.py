@@ -184,7 +184,7 @@ REST_FRAMEWORK = {
     ],  # Below is where we specify that requests are globally limited to 1 per second
     # Per each IP Address and a total of 1000 request per day
     'DEFAULT_THROTTLE_RATES': {
-        'burst': '20/second',
+        'burst': '1/second',
         'sustained': '1000/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
