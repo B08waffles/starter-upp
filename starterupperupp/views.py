@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+import django_filters
 # Views handle the HTTP requests for our models
 
 
@@ -62,14 +63,19 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
     authentication_classes = [ TokenAuthentication ]
     permission_classes = [permissions.IsAuthenticated]
-
+    
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     authentication_classes = [ TokenAuthentication ]
     permission_classes = [permissions.IsAuthenticated]
+    name = 'transaction-list'
 
+    filter_fields = (
+        'associated_company_id',
+        'associated_user_id',
+    )
 
 
 class UserViewSet(viewsets.ModelViewSet):
