@@ -62,6 +62,18 @@ need to repeat step 4 with a quick `source env/bin/activate` possibly, otherwise
 now type `python manage.py test`, this will run 9 Unit tests to satisfy Proj2.18.
 For clarity, this step requires you to have two open terminals to excecute.
 
+-------------------------ADDITIONAL INFO---------------------------------------------
+If you want to test the endpoints with something like postman or Thunder Client you
+will need to login or signup at either http://localhost:8000/login/ or 
+http://localhost:8000/signup/ respectively, there you will be given a 'Token" upon
+successful request, this token needs to be added into the your request
+header like so: "Authorization": "Token 2fc012d9a97e2a40ed8adddefa47a328658cd767".
+To clarify, you need to prefix the token value with "Token ", there needs to be a
+space between Token and its value. Otherwise you can run:
+`python manage.py createsuperuser`, then direct your browser to 
+http://localhost:8000/admin/ and sign into there to see all CRUD associated with 
+this project. 
+
 _____________________________________________________________________________________
 
                             *INSTRUCTIONS FOR WINDOWS*
@@ -121,6 +133,18 @@ Now make sure the server is running, open a new terminal in your IDE, you may
 need to repeat step 4 with a quick `env\bin\activate` possibly, otherwise
 now type `python manage.py test`, this will run 9 Unit tests to satisfy Proj2.18.
 For clarity, this step requires you to have two open terminals to excecute.
+
+-------------------------ADDITIONAL INFO---------------------------------------------
+If you want to test the endpoints with something like postman or Thunder Client you
+will need to login or signup at either http://localhost:8000/login/ or 
+http://localhost:8000/signup/ respectively, there you will be given a 'Token" upon
+successful request, this token needs to be added into the your request
+header like so: "Authorization": "Token 2fc012d9a97e2a40ed8adddefa47a328658cd767".
+To clarify, you need to prefix the token value with "Token ", there needs to be a
+space between Token and its value. Otherwise you can run:
+`python manage.py createsuperuser`, then direct your browser to 
+http://localhost:8000/admin/ and sign into there to see all CRUD associated with 
+this project. 
 
 -------------------------------------------------------------------------------------
 
