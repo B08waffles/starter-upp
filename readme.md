@@ -11,11 +11,11 @@ terminal window and typing `python`, if successful you will enter a python shell
 the terminal as confirmed by the presence of >>> (Ctrl+z to exit) otherwise you must
 download Python with your Operating System's Package Manager like so:
 Debian/Ubuntu/Linux Mint:
-`sudo apt install python`
+`sudo apt install python3`
 Arch based systems:
-`sudo pacman -S python`
+`sudo pacman -S python3`
 Fedora Linux:
-`sudo dnf install python` or `sudo dnf install python3.11`
+`sudo dnf install python3` or `sudo dnf install python3.11`
 
 Different operating systems may have access to different versions of Python, for our
 purposes here all we need is Python version 3 or above, preferably Python 3.10.2.
@@ -89,7 +89,7 @@ Virtual Machine.
 
 1. Go to https://www.python.org/downloads/release/python-3104/ and select the
 appropriate installer for your version of Windows. This will install Python on your
-machine so that we may proceed.
+machine so that we may proceed. You need to install Python 3 or above.
 
 2. Go to https://github.com/B08waffles/starter-upp and download as a ZIP, extract the
 ZIP and open the folder in Visual Studio Code or similar IDE program.
