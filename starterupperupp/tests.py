@@ -167,6 +167,7 @@ class TestApi(APITestCase):
         
         
     def test_login_user(self):
+        """ Test to see if we can login  """
         url = reverse(views.login)
         data = {
             "username": "test-2",
