@@ -188,7 +188,7 @@ REST_FRAMEWORK = {
     ],  # Below is where we specify that requests are globally limited to 1 per second
     # Per each IP Address and a total of 1000 request per day
     'DEFAULT_THROTTLE_RATES': {
-        'burst': '1/second',
+        'burst': '5/second',
         'sustained': '1000/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
@@ -230,7 +230,8 @@ CORS_ORIGIN_WHITELIST = [
 'http://localhost:1234',
 'http://127.0.0.1:1234',
 'http://localhost:8000',
-'http://127.0.0.1:8000'
+'http://127.0.0.1:8000',
+'http://localhost:3000'
 ]
 
 REST_SAFE_LIST_IPS = [

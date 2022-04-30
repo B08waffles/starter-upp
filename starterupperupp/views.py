@@ -71,11 +71,15 @@ class TransactionViewSet(viewsets.ModelViewSet):
     authentication_classes = [ TokenAuthentication ]
     permission_classes = [permissions.IsAuthenticated]
     name = 'transaction-list'
+    
 
     filter_fields = (
         'associated_company_id',
         'associated_user_id',
+        'type_of_contribution'
     )
+
+    
 
 
 class UserViewSet(viewsets.ModelViewSet):
