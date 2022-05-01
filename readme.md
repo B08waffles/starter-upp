@@ -144,15 +144,15 @@ this project.
 
 
 
-                    THANKS FOR READING!
+THANKS FOR READING!
 
 
-
-                ============================
-                *       Brandon Kane       *
-                *    Student: 458955663    *
-                *Diploma of Web Development*
-                *        TAFE QLD          *
-                ============================
-
+```yaml
+============================
+       Brandon Kane       
+    Student: 458955663    
+Diploma of Web Development
+        TAFE QLD          
+============================
+```
 
