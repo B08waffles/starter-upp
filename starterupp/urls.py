@@ -18,18 +18,22 @@ from django.contrib.auth import urls
 from django.urls import include, path
 from rest_framework import routers
 from starterupperupp import views
-
+from django_otp.admin import OTPAdminSite
+admin.site.site_header = 'Awesome Inc. Administration'
+admin.site.site_title = 'Awesome Inc. Administration'
 router = routers.DefaultRouter()
 router.register(r'companys', views.CompanyViewSet)
 router.register(r'transactions', views.TransactionViewSet)
 router.register(r'users', views.UserViewSet)
 # router.register(r'trannys', views.PieViewSet.as_view({'get': 'list'}))
 
+admin.site.__class__ = OTPAdminSite
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('you-would-have-never-guessed-it/', admin.site.urls),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('', include(router.urls)),
     path('signup/', views.signup),
     path('login/', views.login),
-    
+    path('api-auth/', include('rest_framework.urls')),
 ]

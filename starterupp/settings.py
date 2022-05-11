@@ -31,9 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',  # Core authentication framework and its default models
     # Django content type system (allows permissions to be associated with models)
+    'django_otp',
+    'django_otp.plugins.otp_totp',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -50,6 +54,9 @@ INSTALLED_APPS = [
     'django_filters'
 ]
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SILENCED_SYSTEM_CHECKS = ['security.W019']
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'ip_logger.middleware.LogIPMiddleware',
@@ -63,11 +70,14 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     # Associates users with requests using sessions
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_audit_log_middleware.AuditLogMiddleware',
     
 ]
+
+OTP_TOTP_USSUER = 'Starter-Upp'
 
 ROOT_URLCONF = 'starterupp.urls'
 
@@ -147,6 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
     ),
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'requestlogs.views.exception_handler'
@@ -192,7 +203,8 @@ REST_FRAMEWORK = {
         'sustained': '1000/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
-        'starterupp.safelistpermission.SafelistPermission',   # see REST_SAFE_LIST_IPS
+        'starterupp.safelistpermission.SafelistPermission',
+        'rest_framework.permissions.IsAuthenticated',  # see REST_SAFE_LIST_IPS
     )
 }
 # Logging is handled by the default Django Logger augmented with
