@@ -61,17 +61,16 @@ def login(request):
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
-    authentication_classes = [ TokenAuthentication ]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
-    
+
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    authentication_classes = [ TokenAuthentication ]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     name = 'transaction-list'
-    
 
     filter_fields = (
         'associated_company_id',
@@ -79,11 +78,33 @@ class TransactionViewSet(viewsets.ModelViewSet):
         'type_of_contribution'
     )
 
-    
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    authentication_classes = [ TokenAuthentication ]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+
+# new code for pie chart test
+# class PieViewSet(viewsets.ModelViewSet):
+#     serializer_class = TransactionSerializer
+    
+#     def get_pies(self):
+#         company = self.request.query_params.get("associated_company", None)
+#         if company is None:
+#             queryset = Transaction.objects.none()
+#         else:
+#             queryset = Transaction.objects.all
+#         return queryset    
+# for work in transaction:
+#             amount_to_be_added = 0
+#         if work[obj.type_of_contribution] == obj.MI:
+#             amount_to_be_added += work[obj.amount]
+#         elif work[obj.type_of_contribution] == obj.HW:
+#             amount_to_be_added += work["amount"] * 30
+    
+#         if work["associated_user"] in totals:
+#             totals[work["associated_user"]] += amount_to_be_added
+#         else:
+#             totals[work["associated_user"]] = amount_to_be_added
+#         return      

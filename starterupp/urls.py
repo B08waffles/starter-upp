@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'companys', views.CompanyViewSet)
 router.register(r'transactions', views.TransactionViewSet)
 router.register(r'users', views.UserViewSet)
+# router.register(r'trannys', views.PieViewSet.as_view({'get': 'list'}))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('signup/', views.signup),
     path('login/', views.login),
+    
 ]
