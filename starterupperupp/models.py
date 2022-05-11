@@ -15,7 +15,7 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
-# the function in the models, the text after `def`, is dictating what the admin panel sees from the model
+# the function in the models, the text after `def`, is dictating what the admin panel sees from the model 
 
 
 class Transaction(models.Model):
