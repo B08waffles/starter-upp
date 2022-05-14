@@ -6,16 +6,25 @@
 ---------------
 1. Check to see if you have the latest version of Python installed by opening up a
 terminal window and typing `python`, if successful you will enter a python shell in
-the terminal as confirmed by the presence of >>> (Ctrl+z to exit) otherwise you must
+the terminal as confirmed by the presence of `>>>` (Ctrl+z to exit) otherwise you must
 download Python with your Operating System's Package Manager like so:
-Debian/Ubuntu/Linux Mint:
-`sudo apt install python3`
-Arch based systems:
-`sudo pacman -S python3`
-Fedora Linux:
-`sudo dnf install python3` or `sudo dnf install python3.11`
 
-> Different operating systems may have access to different versions of Python, for our purposes here all we need is Python version 3 or above, preferably Python 3.10.2.
+__Debian/Ubuntu/Linux Mint:__
+```console
+sudo apt install python3
+```
+
+__Arch based systems:__
+```console
+sudo pacman -S python3
+```
+
+__Fedora Linux:__
+```console
+sudo dnf install python3
+```
+
+ Different operating systems may have access to different versions of Python, for our purposes here all we need is Python version 3 or above, preferably Python 3.10.2.
 
 2. Go to https://github.com/B08waffles/starter-upp and download as a ZIP, extract the
 ZIP and open the folder in Visual Studio Code or similar IDE program.
@@ -27,7 +36,7 @@ ZIP and open the folder in Visual Studio Code or similar IDE program.
 `source env/bin/activate` to activate the Python Virtual Environment needed in order
 to setup this web service.
 
-> This Python Virtual Environment holds all the packages and dependencies necessary for this web service to run, it works independently of any pre-existing globally installed packages, as a self contained file system.
+> This Python Virtual Environment holds all the packages and dependencies necessary for this web service to run, it works independently of any pre-existing globally installed packages as it is a self contained file system.
 
 5. Now we must install all our package dependencies by typing into the terminal
 `pip install -r requirements.txt`.
@@ -79,7 +88,7 @@ this project.
 -----------------------------
 
 
-> DISCLAIMER: While the steps below SHOULD work, I was not able to get this web service working in my own Windows machine, therefore it is of great preference to the author/ developer that this is ran in a Linux environment, as intended. This can be done within windows by installing a Linux distro as an App/program via WSL or by way of a Virtual Machine.
+> **DISCLAIMER:** While the steps below _should_ work, I was not able to get this web service working in my own Windows machine, therefore it is of great preference to the author/ developer that this is ran in a Linux environment, as intended. This can be done within windows by installing a Linux distro as an App/program via WSL or by way of a Virtual Machine.
 
 
 1. Go to https://www.python.org/downloads/release/python-3104/ and select the
@@ -149,8 +158,7 @@ THANKS FOR READING!
 
 ```yaml
 ============================
-       Brandon Kane       
-    Student: 458955663    
+       Brandon Kane          
 Diploma of Web Development
         TAFE QLD          
 ============================

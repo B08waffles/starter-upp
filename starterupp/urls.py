@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import urls
+
 from django.urls import include, path
 from rest_framework import routers
 from starterupperupp import views
 from django_otp.admin import OTPAdminSite
-admin.site.site_header = 'Awesome Inc. Administration'
-admin.site.site_title = 'Awesome Inc. Administration'
+
+admin.site.site_header = 'STARTER UPP'
+admin.site.site_title = 'STARTER UPP'
 router = routers.DefaultRouter()
 router.register(r'companys', views.CompanyViewSet)
 router.register(r'transactions', views.TransactionViewSet)
@@ -36,4 +38,6 @@ urlpatterns = [
     path('signup/', views.signup),
     path('login/', views.login),
     path('api-auth/', include('rest_framework.urls')),
+    
+    
 ]

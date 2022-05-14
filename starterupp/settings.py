@@ -32,7 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
-    'admin_interface',
+    #    'admin_interface',
+    #    'colorfield',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',  # Core authentication framework and its default models
     # Django content type system (allows permissions to be associated with models)
@@ -44,15 +46,36 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #    'starterupperupp.apps.StarterupperuppConfig'
     'starterupperupp',
+    
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_json_api',
-    #'actionslog',
+    # 'actionslog',
     'ip_logger',
     'corsheaders',
     'django_audit_log_middleware',
+
     'django_filters'
 ]
+
+
+
+
+
+
+
+JAZZMIN_SETTINGS = {
+
+    "show_ui_builder":  True
+}
+
+
+JAZZMIN_UI_TWEAKS = {
+
+    "theme": "superhero",
+    "navbar": "navbar-dark",
+}
+
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SILENCED_SYSTEM_CHECKS = ['security.W019']
@@ -61,7 +84,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'ip_logger.middleware.LogIPMiddleware',
     'requestlogs.middleware.RequestLogsMiddleware',
-    
+    "django_simple_ip_restrict.middleware.ip_filter",
     'request_logging.middleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     # Manage sessions across requests
@@ -71,10 +94,11 @@ MIDDLEWARE = [
     # Associates users with requests using sessions
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_audit_log_middleware.AuditLogMiddleware',
-    
+
 ]
 
 OTP_TOTP_USSUER = 'Starter-Upp'
@@ -107,7 +131,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        
+
     }
 }
 
@@ -180,11 +204,11 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
     'DEFAULT_FILTER_BACKENDS': (
-       # 'rest_framework_json_api.filters.QueryParameterValidationFilter',
+        # 'rest_framework_json_api.filters.QueryParameterValidationFilter',
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework_json_api.filters.OrderingFilter',
         'rest_framework_json_api.django_filters.DjangoFilterBackend',
-        
+
         'rest_framework.filters.SearchFilter',
     ),
     'SEARCH_PARAM': 'filter[search]',
@@ -239,11 +263,11 @@ REQUESTLOGS = {
 }
 
 CORS_ORIGIN_WHITELIST = [
-'http://localhost:1234',
-'http://127.0.0.1:1234',
-'http://localhost:8000',
-'http://127.0.0.1:8000',
-'http://localhost:3000'
+    'http://localhost:1234',
+    'http://127.0.0.1:1234',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://localhost:3000'
 ]
 
 REST_SAFE_LIST_IPS = [
@@ -262,4 +286,12 @@ CORS_ALLOW_METHODS = [
     "PATCH",
     "POST",
     "PUT",
+]
+
+IP_PROTECTED_NAMESPACES = ["admin"]
+IP_NETWORKS_WHITELIST = [
+    '127.0.0.1',
+    '192.168.0',
+    '127.0.0.1',
+    '127.0.0.1'
 ]
