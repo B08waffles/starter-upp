@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator, MinLengthValidator, MaxVal
 # Models are created here, this is for use with sqlite3, django's built in ORM and database system
 
 
+
 class Company(models.Model):
     company_name = models.CharField(max_length=55, unique=True, validators=[
                                     MinLengthValidator(3), MaxLengthValidator(55)])
