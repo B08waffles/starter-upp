@@ -1,9 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.validators import MinValueValidator, MinLengthValidator, MaxValueValidator, MaxLengthValidator
+from django.contrib.auth.models import AbstractUser
 # Models are created here, this is for use with sqlite3, django's built in ORM and database system
-
-
 
 class Company(models.Model):
     company_name = models.CharField(max_length=55, unique=True, validators=[
@@ -16,8 +15,18 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
-# the function in the models, the text after `def`, is dictating what the admin panel sees from the model 
+class PayRate(models.Model):
+    associated_user = models.ForeignKey(
+        User, to_field='username', on_delete=models.CASCADE, related_name='the_associated_user')
+    date = models.DateTimeField(auto_now=True)
+    pay_rate = models.FloatField(max_length=55, validators=[
+                               MinValueValidator(0), MaxValueValidator(9999)])
+    associated_company = models.ForeignKey(
+        Company, to_field='company_name', on_delete=models.CASCADE, related_name='the_associated_company')
 
+    def __int__(self):
+        return self.associated_user
+# the function in the models, the text after `def`, is dictating what the admin panel sees from the model 
 
 class Transaction(models.Model):
     CHOICES = (
@@ -35,6 +44,7 @@ class Transaction(models.Model):
                                             MinLengthValidator(2), MaxLengthValidator(2)])
     associated_user = models.ForeignKey(
         User, to_field='username', on_delete=models.CASCADE, related_name='associated_user')
+#    pay_rate = models.ForeignKey(PayRate, to_field="pay_rate", on_delete=CASCADE, related_name="pay_per_hour")    
 
     def __int__(self):
         return self.pk
