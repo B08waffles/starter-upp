@@ -181,7 +181,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication'
+        #'rest_framework.authentication.SessionAuthentication'
     ),
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'requestlogs.views.exception_handler'
@@ -228,7 +228,7 @@ REST_FRAMEWORK = {
     },
     'DEFAULT_PERMISSION_CLASSES': (
         'starterupp.safelistpermission.SafelistPermission',
-        # 'rest_framework.permissions.IsAuthenticated',  # see REST_SAFE_LIST_IPS
+        'rest_framework.permissions.IsAuthenticated',  # see REST_SAFE_LIST_IPS
     )
 }
 # Logging is handled by the default Django Logger augmented with

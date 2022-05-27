@@ -1,6 +1,6 @@
 from rest_framework_json_api import serializers
 
-from starterupperupp.models import Company, Transaction
+from starterupperupp.models import Company, Transaction, PayRate
 
 from django.contrib.auth.models import User
 
@@ -33,6 +33,13 @@ class TransactionSerializer(serializers.ModelSerializer):
             #'associated_company_id'
         )
         #lookup_field = 'associated_company_id'
+
+class PayRateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PayRate
+        fields = (
+            'id', 'associated_user', 'date', 'pay_rate', 'associated_company'
+        )
 
 # class PieSerializer(serializers.ModelSerializer):
 #     total = serializers.SerializerMethodField()

@@ -15,21 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import urls
-
 from django.urls import include, path
 from rest_framework import routers
 from starterupperupp import views
 from django_otp.admin import OTPAdminSite
-
+from rest_framework.authtoken.views import obtain_auth_token
 admin.site.site_header = 'STARTER UPP'
 admin.site.site_title = 'STARTER UPP'
 router = routers.DefaultRouter()
 router.register(r'companys', views.CompanyViewSet)
 router.register(r'transactions', views.TransactionViewSet)
 router.register(r'users', views.UserViewSet)
-# router.register(r'trannys', views.PieViewSet.as_view({'get': 'list'}))
+router.register(r'payrates', views.PayRateViewSet)
 
-admin.site.__class__ = OTPAdminSite
+# router.register(r'trannys', views.PieViewSet.as_view({'get': 'list'}))
+# admin.site.__class__ = OTPAdminSite
 
 urlpatterns = [
     path('you-would-have-never-guessed-it/', admin.site.urls),
@@ -38,6 +38,5 @@ urlpatterns = [
     path('signup/', views.signup),
     path('login/', views.login),
     path('api-auth/', include('rest_framework.urls')),
-    
-    
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]

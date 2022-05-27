@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from starterupperupp.models import Company, Transaction
-from starterupperupp.serializers import CompanySerializer, TransactionSerializer, UserSerializer
+from starterupperupp.models import Company, Transaction, PayRate
+from starterupperupp.serializers import CompanySerializer, TransactionSerializer, UserSerializer, PayRateSerializer
 from rest_framework import viewsets
 from django.db import IntegrityError
 from rest_framework.parsers import JSONParser
@@ -33,35 +33,35 @@ def signup(request):
 
             token = Token.objects.create(user=user)
             
-            return JsonResponse({'token': str(token)}, status=201)
+            return JsonResponse({'message': 'You are in our system now champ!'}, status=201)
         except IntegrityError:
             return JsonResponse(
                 {'error': 'username and/or email taken. choose another username and/or email'},
                 status=400)
 
 
-@csrf_exempt
-def login(request):
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
+# @csrf_exempt
+# def login(request):
+#     if request.method == 'POST':
+#         data = JSONParser().parse(request)
         
-        user = authenticate(
-            request,
-            username=data['username'],
-            password=data['password'])
-        if user is None:
-            return JsonResponse(
-                {'error': 'unable to login. check username and password'},
-                status=400)
-        else:  # return user token
-            try:
-                token = Token.objects.get(user=user)
+#         user = authenticate(
+#             request,
+#             username=data['username'],
+#             password=data['password'])
+#         if user is None:
+#             return JsonResponse(
+#                 {'error': 'unable to login. check username and password'},
+#                 status=400)
+#         else:  # return user token
+#             try:
+#                 token = Token.objects.get(user=user)
                 
-            except:  # if token not in db, create a new one
-                token = Token.objects.create(user=user)
+#             except:  # if token not in db, create a new one
+#                 token = Token.objects.create(user=user)
 
  
-            return JsonResponse({'token': str(token)}, status=201)
+#             return JsonResponse({'token': str(token)}, status=201)
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -90,6 +90,17 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+
+class PayRateViewSet(viewsets.ModelViewSet):
+    queryset = PayRate.objects.all()
+    serializer_class = PayRateSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    name = 'payrate-list'
+
+    filter_fields = (
+        'associated_user', 'date', 'associated_company'
+    )  
 
 # new code for pie chart test
 # class PieViewSet(viewsets.ModelViewSet):
