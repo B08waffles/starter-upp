@@ -81,6 +81,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 SILENCED_SYSTEM_CHECKS = ['security.W019']
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'corsheaders.middleware.CorsMiddleware',
     'ip_logger.middleware.LogIPMiddleware',
     'requestlogs.middleware.RequestLogsMiddleware',
@@ -223,7 +224,7 @@ REST_FRAMEWORK = {
     ],  # Below is where we specify that requests are globally limited to 1 per second
     # Per each IP Address and a total of 1000 request per day
     'DEFAULT_THROTTLE_RATES': {
-        'burst': '5/second',
+        'burst': '1/second',
         'sustained': '1000/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
@@ -296,5 +297,10 @@ IP_NETWORKS_WHITELIST = [
     '127.0.0.1',
     '127.0.0.1'
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# FORCE_SCRIPT_NAME = "/my-app"
+# STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
