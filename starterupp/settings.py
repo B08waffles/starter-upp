@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 from pathlib import Path
 
@@ -20,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--r!x%93q=md2^soi-&of#6%-l008wl)mj!s%t)3v4)gyy036a0'
+SECRET_KEY = env("SECRET_KEY") #'django-insecure--r!x%93q=md2^soi-&of#6%-l008wl)mj!s%t)3v4)gyy036a0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
 
 
 # Application definition
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
 
     #    'admin_interface',
     #    'colorfield',
+    'whitenoise.runserver_nostatic',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',  # Core authentication framework and its default models
@@ -224,8 +228,8 @@ REST_FRAMEWORK = {
     ],  # Below is where we specify that requests are globally limited to 1 per second
     # Per each IP Address and a total of 1000 request per day
     'DEFAULT_THROTTLE_RATES': {
-        'burst': '1/second',
-        'sustained': '1000/day',
+        'burst': '2/second',
+        'sustained': '500/day',
     },
     'DEFAULT_PERMISSION_CLASSES': (
         'starterupp.safelistpermission.SafelistPermission',
@@ -268,14 +272,16 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:1234',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+
 ]
 
 REST_SAFE_LIST_IPS = [
     '127.0.0.1',
     '123.45.67.89',   # example IP
     '192.168.0.',
-    '127.0.0.1:1234' 
+    '127.0.0.1:1234',
+    '.herokuapp.com' 
    # '83.0.4103.106'    # the local subnet, stop typing when subnet is filled out
 ]
 
@@ -295,12 +301,16 @@ IP_NETWORKS_WHITELIST = [
     '127.0.0.1',
     '192.168.0',
     '127.0.0.1',
-    '127.0.0.1'
+    '127.0.0.1',
+#    '.herokuapp.com'
 ]
-
+WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # FORCE_SCRIPT_NAME = "/my-app"
 # STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+import django_heroku
+django_heroku.settings(locals())
