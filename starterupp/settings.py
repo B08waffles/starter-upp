@@ -275,10 +275,13 @@ CORS_ORIGIN_WHITELIST = [
     # 'http://127.0.0.1:8000',
     # 'http://localhost:3000',
     'https://starter-upp-django-back-end.herokuapp.com',
-    '192.168.20.17',
-    '58.96.38.31',
-    'https://starterupp.herokuapp.com/',
-    'https://peppy-centaur-d9f42c.netlify.app/',
+    # '192.168.20.17',
+    # '58.96.38.31',
+    'https://starterupp.herokuapp.com',
+    'https://peppy-centaur-d9f42c.netlify.app',
+    'https://www.starterupp.com',
+    'https://starterupp.com'
+    '.starterupp.com',
 
 ]
 
@@ -288,12 +291,15 @@ REST_SAFE_LIST_IPS = [
     # '192.168.0.',
     # '127.0.0.1:1234',
     '.herokuapp.com',
-    'https://starter-upp-django-back-end.herokuapp.com/',
+    'https://starter-upp-django-back-end.herokuapp.com',
     # 'localhost',
     '192.168.20.17',
     '58.96.38.31',
-    'https://starterupp.herokuapp.com/',
-    'https://peppy-centaur-d9f42c.netlify.app/'
+    'https://starterupp.herokuapp.com',
+    'https://peppy-centaur-d9f42c.netlify.app'
+    'https://www.starterupp.com',
+    'https://starterupp.com'
+    '.starterupp.com',
    # '83.0.4103.106'    # the local subnet, stop typing when subnet is filled out
 ]
 
