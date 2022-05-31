@@ -278,7 +278,7 @@ CORS_ORIGIN_WHITELIST = [
     '192.168.20.17',
     '58.96.38.31',
     'https://starterupp.herokuapp.com/',
-    'https://peppy-centaur-d9f42c.netlify.app/'
+    'https://peppy-centaur-d9f42c.netlify.app/',
 
 ]
 
