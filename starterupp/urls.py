@@ -29,7 +29,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'payrates', views.PayRateViewSet)
 
 # router.register(r'trannys', views.PieViewSet.as_view({'get': 'list'}))
-# admin.site.__class__ = OTPAdminSite
+admin.site.__class__ = OTPAdminSite
 
 urlpatterns = [
     path('you-would-have-never-guessed-it/', admin.site.urls),
