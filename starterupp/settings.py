@@ -273,7 +273,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://localhost:3000',
-    "https://starter-upp-django-back-end.herokuapp.com/"
+    'https://starter-upp-django-back-end.herokuapp.com',
 
 ]
 
@@ -283,7 +283,7 @@ REST_SAFE_LIST_IPS = [
     '192.168.0.',
     '127.0.0.1:1234',
     '.herokuapp.com',
-    "https://starter-upp-django-back-end.herokuapp.com/" 
+    'https://starter-upp-django-back-end.herokuapp.com/' 
    # '83.0.4103.106'    # the local subnet, stop typing when subnet is filled out
 ]
 
@@ -304,7 +304,7 @@ IP_NETWORKS_WHITELIST = [
     '192.168.0',
     '127.0.0.1',
     '127.0.0.1',
-    "https://starter-upp-django-back-end.herokuapp.com/"
+    
 #    '.herokuapp.com'
 ]
 WHITENOISE_USE_FINDERS = True
