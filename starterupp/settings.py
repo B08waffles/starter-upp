@@ -27,7 +27,7 @@ SECRET_KEY = env("SECRET_KEY") #'django-insecure--r!x%93q=md2^soi-&of#6%-l008wl)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "https://starter-upp-django-back-end.herokuapp.com/"]
 
 
 
@@ -273,6 +273,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://localhost:3000',
+    "https://starter-upp-django-back-end.herokuapp.com/"
 
 ]
 
@@ -281,7 +282,8 @@ REST_SAFE_LIST_IPS = [
     '123.45.67.89',   # example IP
     '192.168.0.',
     '127.0.0.1:1234',
-    '.herokuapp.com' 
+    '.herokuapp.com',
+    "https://starter-upp-django-back-end.herokuapp.com/" 
    # '83.0.4103.106'    # the local subnet, stop typing when subnet is filled out
 ]
 
@@ -302,6 +304,7 @@ IP_NETWORKS_WHITELIST = [
     '192.168.0',
     '127.0.0.1',
     '127.0.0.1',
+    "https://starter-upp-django-back-end.herokuapp.com/"
 #    '.herokuapp.com'
 ]
 WHITENOISE_USE_FINDERS = True
