@@ -277,6 +277,7 @@ CORS_ORIGIN_WHITELIST = [
     'https://starter-upp-django-back-end.herokuapp.com',
     '192.168.20.17',
     '58.96.38.31',
+    'https://starterupp.herokuapp.com/',
 
 ]
 
@@ -290,6 +291,7 @@ REST_SAFE_LIST_IPS = [
     # 'localhost',
     '192.168.20.17',
     '58.96.38.31',
+    'https://starterupp.herokuapp.com/',
    # '83.0.4103.106'    # the local subnet, stop typing when subnet is filled out
 ]
 
