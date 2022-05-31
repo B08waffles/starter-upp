@@ -1,1 +1,1 @@
-web: gunicorn starterupp.wsgi --log-file -
+web gunicorn starterupp.wsgi --log-file -
