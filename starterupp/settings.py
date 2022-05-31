@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import environ
+import os
 env = environ.Env()
 environ.Env.read_env()
 
@@ -25,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY") #'django-insecure--r!x%93q=md2^soi-&of#6%-l008wl)mj!s%t)3v4)gyy036a0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "https://starter-upp-django-back-end.herokuapp.com/"]
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'https://starter-upp-django-back-end.herokuapp.com/', '127.0.0.1', 'localhost']
 
 
 
@@ -175,7 +176,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -283,7 +284,8 @@ REST_SAFE_LIST_IPS = [
     '192.168.0.',
     '127.0.0.1:1234',
     '.herokuapp.com',
-    'https://starter-upp-django-back-end.herokuapp.com/' 
+    'https://starter-upp-django-back-end.herokuapp.com/',
+    'localhost'
    # '83.0.4103.106'    # the local subnet, stop typing when subnet is filled out
 ]
 
@@ -305,7 +307,7 @@ IP_NETWORKS_WHITELIST = [
     '127.0.0.1',
     '127.0.0.1',
     
-#    '.herokuapp.com'
+   #'.herokuapp.com'
 ]
 WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -313,7 +315,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # FORCE_SCRIPT_NAME = "/my-app"
 # STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = "staticfiles"
+
+# STATIC_URL = '/staticfiles/'
+
+# STATICFILES_DIRS = [
+#     os.path.join (BASE_DIR, 'staticfiles'), ## Modify Places
+# ]
 
 import django_heroku
 django_heroku.settings(locals())
