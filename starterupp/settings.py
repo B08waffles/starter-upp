@@ -226,8 +226,8 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': [
         'starterupp.throttles.BurstRateThrottle',
         'starterupp.throttles.SustainedRateThrottle'
-    ],  # Below is where we specify that requests are globally limited to 1 per second
-    # Per each IP Address and a total of 1000 request per day
+    ],  # Below is where we specify that requests per unique IP address/user are limited to 2 per second
+    # Per each IP Address and a total of 500 request per day
     'DEFAULT_THROTTLE_RATES': {
         'burst': '2/second',
         'sustained': '500/day',
@@ -282,7 +282,6 @@ CORS_ORIGIN_WHITELIST = [
     'https://www.starterupp.com',
     'https://starterupp.com'
     '.starterupp.com',
-
 ]
 
 REST_SAFE_LIST_IPS = [
@@ -339,5 +338,5 @@ STATIC_ROOT = "staticfiles"
 #     os.path.join (BASE_DIR, 'staticfiles'), ## Modify Places
 # ]
 
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
