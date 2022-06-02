@@ -1,6 +1,45 @@
 # STARTERUUPP
 
 > About Starter-Upp: Starter-Upp is a capitalisation system. Instead of manually using spreadsheets to keep track of things like company ownership and individual contributions, this app intends to automate some of the work here by allowing users to create companies, transactions and for this data to be presented to the end-user in the form of both cards and graphs/charts.
+
+This application primarily consist of the following technologies:
+- autopep8==1.6.0
+- cryptography==36.0.2
+- dj-rest-auth==2.2.4
+- django-admin-508==0.2.0
+- django-admin-interface==0.19.0
+- django-allauth==0.50.0
+- django-audit-log==0.7.0
+- django-audit-log-middleware==0.0.4
+- django-cors-headers==3.11.0
+- django-environ==0.8.1
+- django-filter==21.1
+- django-heroku==0.3.1
+- django-ip-logger==1.0.1
+- django-jazzmin==2.5.0
+- django-otp==1.1.3
+- django-request-logger==0.3.2
+- django-request-logging==0.7.5
+- django-requestlogs==0.3.0
+- django-simple-ip-restrict==1.0.40
+- djangorestframework-jsonapi==5.0.0
+- gunicorn==20.1.0
+- openapi-codec==1.3.2
+- pip-chill==1.0.1
+- qrcode==7.3.1
+- redgreenunittest==0.1.1
+- simplejson==3.17.6
+
+![Lines of code](https://img.shields.io/tokei/lines/github/B08waffles/starter-upp-django-back-end)
+![GitHub repo size](https://img.shields.io/github/repo-size/B08waffles/starter-upp-django-back-end)
+![GitHub](https://img.shields.io/github/license/B08waffles/starter-upp-django-back-end)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
+![GitHub top language](https://img.shields.io/github/languages/top/b08waffles/starter-upp-django-back-end)
+[![GitHub issues](https://img.shields.io/github/issues/B08waffles/starter-upp-django-back-end)](https://github.com/B08waffles/starter-upp-django-back-end/issues)
+
+> **DISCLAIMER:** This application's whitelists has been changed to be in accordance with the deployed version of both itself and its asscoiated front-end, therefore if one wishes to test this application themselves, the whitelists must be adjusted accordingly by whitelisting "http://localhost" and "127.0.0.1". The whitelists can be found in "settings.py", the path to that is "starter-upp/starterupp/settings.py". Note also that debug mode has been set to false, if you are wanting to test this locally you will also want to adjust in settings.py the debug mode by setting it to true.
+
+
 ----------------
 ## INSTRUCTIONS FOR LINUX BASED SYSTEMS
 ---------------
@@ -158,9 +197,7 @@ THANKS FOR READING!
 
 ```yaml
 ============================
-       Brandon Kane          
-Diploma of Web Development
-        TAFE QLD          
+       Brandon Kane                
 ============================
 ```
 
